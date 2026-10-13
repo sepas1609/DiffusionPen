@@ -1,0 +1,22 @@
+export { DHSEEngine } from './engine/DHSEEngine';
+export { BezierFitter } from './engine/BezierFitter';
+export { PowerLawModulator } from './engine/PowerLawModulator';
+export { BaselineDrift, GaussianKerning, GlyphJitterBudget } from './engine/NaturalImperfections';
+export { LigatureEngine } from './engine/LigatureEngine';
+export { StyleExtractor } from './extractor/StyleExtractor';
+export { EncryptedVault } from './vault/EncryptedVault';
+export { LatexRenderer } from './structured/LatexRenderer';
+export { CodeBlockHandler } from './structured/CodeBlockHandler';
+export { DiagramSketcher } from './structured/DiagramSketcher';
+export { DocumentRectifier } from './continuation/DocumentRectifier';
+export { LineDetector } from './continuation/LineDetector';
+export { InstrumentFactory, BallpointRenderer, GelPenRenderer, FountainPenRenderer, PencilRenderer, MarkerRenderer } from './realism/InstrumentModels';
+export { WebGLScene } from './realism/WebGLScene';
+export { WatermarkEmbedder } from './security/WatermarkEmbedder';
+export { AccessibilityEngine } from './a11y/AccessibilityEngine';
+export { BasePlugin } from './plugins/DHSEPlugin';
+export { VSCodePlugin } from './plugins/VSCodePlugin';
+
+export * from './types/engine';
+export * from './types/vault';
+export * from './types/pricing';
