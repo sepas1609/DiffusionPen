@@ -1,125 +1,554 @@
-# DiffusionPen — Digital Handwriting Synthesis Engine (DHSE v2.0)
+<div align="center">
 
-> **Zero-Knowledge, Biomechanically-Faithful Digital Handwriting Synthesis Platform**  
-> Mathematically grounded in the Two-Thirds Power Law, cubic Bézier path vectorization, KaTeX AST structured parsing, Three.js 3D environmental realism, and steganographic anti-forgery watermarking.
+# 🖋️ DiffusionPen (DHSE v2.0)
+### *Biomechanically-Faithful Zero-Knowledge Digital Handwriting Synthesis Platform*
 
----
+[![GitHub Repository](https://img.shields.io/badge/GitHub-sepas1609%2FDiffusionPen-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sepas1609/DiffusionPen)
+[![Release](https://img.shields.io/badge/Release-v2.0.0-38bdf8?style=for-the-badge&logo=git&logoColor=white)](https://github.com/sepas1609/DiffusionPen/releases/tag/v2.0.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-10b981.svg?style=for-the-badge)](LICENSE)
+[![Tests: 18/18 Passing](https://img.shields.io/badge/Vitest-18%2F18%20Passing-success?style=for-the-badge&logo=vitest&logoColor=white)](https://github.com/sepas1609/DiffusionPen)
+[![TypeScript Strict](https://img.shields.io/badge/TypeScript-5.6%20Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Zero-Knowledge](https://img.shields.io/badge/Security-100%25%20Client%20Vault-8b5cf6?style=for-the-badge)](#-zero-knowledge-privacy--data-security)
+[![WebGL 3D](https://img.shields.io/badge/Three.js-3D%20Realism-ff69b4?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 
-## Architecture Blueprint (The 5-Layer Stack)
+<br/>
 
-The DHSE platform is structured as an isolated five-layer client-heavy architecture where **100% of biometric synthesis and rendering executes locally in the browser via WebAssembly, WebGPU, and Canvas/WebGL**:
+<p align="center">
+  <b>A zero-knowledge client-heavy handwriting synthesis engine mathematically grounded in the Two-Thirds Power Law, cubic Bézier path vectorization, KaTeX AST structured parsing, Three.js 3D environmental realism, authentic personal quirks, and steganographic anti-forgery watermarking.</b>
+</p>
 
-- **Layer 5 — Ingestion & Sandbox (Ch. 8, 22, 23):** Real-time calibration sandbox UI, Universal Plugin SDK, and WCAG 2.2 AA dysgraphia/switch-control suite.
-- **Layer 4 — Style Extraction & Glyph Vault (Ch. 3, 16, App B.1):** 256-dimensional ViT+SAQ zero-shot style extraction and AES-GCM (256-bit) encrypted IndexedDB vault (`dhse-vault`).
-- **Layer 3 — Biomechanical Synthesis Core (Ch. 4–7):** Bigram ligature modeling, compound harmonic sine baseline drift, Gaussian Box-Muller kerning, and Two-Thirds Power Law motor kinematic modulation ($\omega = K \kappa^{2/3}$, $v = K R^{1/3}$).
-- **Layer 2 — Structured Content Rendering (Ch. 9–11):** KaTeX AST decomposition for LaTeX math equations, monospace organic jitter grid for code blocks, and Rough.js hand-drawn diagram sketching.
-- **Layer 1 — Realism Studio & Physical Continuation (Ch. 12–15, 17):** 4-corner homography document rectification, Hough line transform ruled paper detection, multi-instrument physics (ballpoint, gel, fountain, pencil, marker), Three.js 3D notebook binding warp ($z = -0.04(x+0.5)^2$), and DWT steganographic micro-watermarking.
+[Overview](#-overview--scientific-foundations) • [Architecture](#-5-layer-system-architecture) • [Pipelines & Flowcharts](#-kinematic--synthesis-pipelines) • [Comparison](#-feature-comparison-matrix) • [Chapter Matrix](#-27-chapter-implementation-matrix) • [Studio & Quirks](#-studio-features--peculiar-hallmarks) • [Quickstart](#-quickstart--local-execution) • [Hosting](#-laboratory--department-hosting) • [Citation](#-academic-citation)
 
----
+<br/>
 
-## Chapter Implementation Matrix
+<img src="./docs/assets/dhse-studio-banner.png" alt="DiffusionPen Studio Workspace" width="850" style="border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.5);" />
 
-| Chapter | Component | Source Location | Description |
-|---|---|---|---|
-| **Ch. 1 & 2** | System Foundations & Contracts | `src/types/engine.ts` | 5-layer contracts, zero-knowledge privacy invariant |
-| **Ch. 3** | Zero-Shot Style Extractor | `src/extractor/StyleExtractor.ts` | 256-dim style vector, SAQ quantization, multi-sample glyph caching |
-| **Ch. 4** | Ligature & Connection Engine | `src/engine/LigatureEngine.ts` | Bigram probability matrix, cursive bridge entry/exit angle tangents |
-| **Ch. 5** | Natural Imperfections | `src/engine/NaturalImperfections.ts` | Compound sine baseline drift, Box-Muller kerning, 5–15% variance threshold |
-| **Ch. 6** | Kinematic Realism | `src/engine/PowerLawModulator.ts` | Two-Thirds Power Law ($\omega = K \kappa^{2/3}$), pressure modulation |
-| **Ch. 7** | Bézier Path Vectorization | `src/engine/BezierFitter.ts` | RDP simplification + Schneider least-squares cubic fitting |
-| **Ch. 8** | Interactive Calibration Sandbox | `src/sandbox/SandboxApp.tsx` | Real-time drawing canvas, parameter rail, live A/B preview |
-| **Ch. 8.1** | Multi-Format Document Importer | `src/importers/FileImporter.ts` | PDF (`pdfjs-dist`), Word DOCX (`mammoth`), TXT, Markdown parser with live Page 1 preview |
-| **Ch. 8.2** | Personal Quirks & Verification | `src/engine/PersonalQuirks.ts` | Crossed 7/Z, high T-bars, open/filled dots, scratch-out typo corrections, signature flourish, evaluator highlight tags |
-| **Ch. 8.3** | High-DPI Multi-Page PDF Exporter | `src/export/PdfExporter.ts` | Paginated PDF export (`jsPDF`) with authentic ruled paper templates & metadata |
-| **Ch. 9** | LaTeX Math Pipeline | `src/structured/LatexRenderer.ts` | KaTeX MathML AST walker, Greek symbol mapper, fallback registry |
-| **Ch. 10** | Code Block Handling | `src/structured/CodeBlockHandler.ts` | Language tokenizer, monospace organic jitter grid, syntax color mapping |
-| **Ch. 11** | Diagram Sketching | `src/structured/DiagramSketcher.ts` | Rough.js flowchart DSL parser (`[A] -> <B> -> (C)`), sketchy vectors |
-| **Ch. 12** | Document Rectification | `src/continuation/DocumentRectifier.ts` | 4-corner homography matrix warping, bilateral illumination normalization |
-| **Ch. 13** | Ruled Lines & HPP Segmentation | `src/continuation/LineDetector.ts` | Hough line transform $(\rho, \theta)$, Horizontal Projection Profile text segmentation |
-| **Ch. 14** | Multi-Instrument Physics | `src/realism/InstrumentModels.ts` | Ballpoint (striations/skips), Gel (bleed halo), Fountain (nib flex), Pencil (grain) |
-| **Ch. 15** | Environmental Realism | `src/realism/WebGLScene.ts` | Three.js 3D binding warp mesh ($z = -0.04(x+0.5)^2$), desk lamp lighting, coffee stains |
-| **Ch. 16** | Zero-Knowledge Vault | `src/vault/EncryptedVault.ts` | WebCrypto AES-GCM (256-bit), PBKDF2 (100k iterations), IndexedDB persistence |
-| **Ch. 17** | Ethical Micro-Watermarking | `src/security/WatermarkEmbedder.ts` | Spatial micro-kerning & DWT steganography, TS-GATR signature fraud defense |
-| **Ch. 18** | Evaluation & QA Benchmarks | `mlops/eval_harness.py` | Character Error Rate (CER), Word Error Rate (WER), Handwriting Distance (HWD) |
-| **Ch. 19** | MLOps & Quantization Pipeline | `mlops/train_vit_saq.py`, `quantize.py` | Distributed PyTorch training script, ONNX INT8 dynamic quantizer (660 MB $\to$ 41 MB) |
-| **Ch. 20** | Hybrid Cloud & Edge Deployment | `src/sw/service-worker.ts`, `deploy/k8s/` | Workbox PWA caching, FastAPI license server, Kubernetes manifests |
-| **Ch. 21** | Security Threat Model | `docs/THREAT_MODEL.md` | STRIDE analysis, GDPR Art 9 / BIPA / CCPA / DPDP compliance matrix |
-| **Ch. 22** | Universal Plugin SDK | `src/plugins/DHSEPlugin.ts`, `VSCodePlugin.ts` | Universal plugin interfaces, VSCode companion extension implementation |
-| **Ch. 23** | Accessibility Deep-Dive | `src/a11y/AccessibilityEngine.ts` | Dysgraphia tremor stabilizer, 1.5s switch-control scanner, WCAG 2.2 AA audit pass |
-| **Ch. 24** | Monetization & Economics | `docs/MONETIZATION.md`, `src/types/pricing.ts` | Pricing tiers, unit economics (Pro LTV/CAC 11.7x), developer REST API |
-| **Ch. 25** | Testing & CI/CD Strategy | `tests/`, `package.json` | Vitest automated unit testing pyramid (18/18 tests passing) |
-| **Ch. 26** | 18-Month Roadmap | `docs/ROADMAP.md` | Q1–Q6 quarterly milestone tracking |
-| **Ch. 27** | Top-15 Risk Register | `docs/RISKS.md` | Comprehensive security, technical, and regulatory risk mitigations |
-| **App. A** | Public APIs | `src/engine/DHSEEngine.ts`, `server/main.py` | Universal JavaScript SDK client & FastAPI REST API |
-| **App. B** | Storage Schemas | `src/types/vault.ts`, `server/schema.sql` | IndexedDB `dhse-vault` & Cloud Postgres database schemas |
-| **App. C** | Academic Bibliography | `docs/REFERENCES.md` | Full literature citations (Graves, CONSTANT, DiffusionPen, Lacquaniti, Viviani) |
+</div>
 
 ---
 
-## Key Studio Features
+## 🏛️ Overview & Scientific Foundations
 
-### 1. Multi-Format Ingestion (PDF, Word DOCX, TXT, MD)
-- **Instant Live Page 1 Sample**: Ingest academic assignments, research drafts, or lecture notes and preview the handwritten transformation instantly.
-- **Client-Side Text Extraction**: Uses `pdfjs-dist` and `mammoth` entirely within the browser with zero external server upload.
+**DiffusionPen (Digital Handwriting Synthesis Engine — DHSE v2.0)** bridges the chasm between mechanical digital typography and authentic human neuromotor biomechanics. 
 
-### 2. Personal Quirks & Evaluator Verification ("Highlight Peculiars")
-- **Authentic Motor Hallmarks**:
-  - European crossed '7' and crossed 'Z'
-  - High and looped 't'-bar crossbars
-  - Unconventional 'i'-dot gestures (open circle, filled dot, diagonal slash)
-  - Realistic scratch-out typo corrections (`~~word~~`) and wavy underlines
-  - Personalized wet-ink signature flourish seal block
-- **Evaluator Audit Mode**: Toggling **"Highlight Peculiars"** renders dashed annotation halos and provenance badges, allowing department heads and evaluators to quickly verify that the submission exhibits the student's unique physical motor traits.
+When humans write, pen velocity and trajectory curvature are bound by neuromuscular physiological invariants, specifically the **Two-Thirds Power Law** ($\omega = K \kappa^{2/3}$, $v = K R^{1/3}$). As the curvature of a stroke increases, the hand naturally slows down, depositing greater ink pressure and ink density. Conversely, during open, low-curvature strokes, rapid movement leads to stroke thinning and natural velocity-dependent trajectory distortion.
 
-### 3. Multi-Page Authentic Handwritten PDF Export
-- Generates high-DPI vector-fidelity PDFs with paginated layout matching standard notebook, grid, legal, dotted, or blank stationery.
-- Includes embedded cryptographic verification watermarks for provenance tracking.
+Traditional digital handwriting fonts and simplistic Bézier tools produce visually artificial, uniform letterforms that fail forensic inspection and human perception. Meanwhile, commercial cloud-based generative AI systems require sending sensitive biometric handwriting signatures and personal academic drafts to third-party servers.
+
+**DiffusionPen** solves both crises through an isolated, zero-knowledge, 5-layer platform where **100% of biometric synthesis, kinematic calculation, and vector rendering executes client-side inside the user's browser via WebAssembly, WebGPU, Canvas, and WebGL**.
 
 ---
 
-## Quick Start & Local Execution
+## ⚡ The Five Crises DHSE Solves
 
-### 1. Install Dependencies
-```bash
-npm install
+| Traditional Handwriting Approach | The Reality | How DiffusionPen Solves It |
+| :--- | :--- | :--- |
+| **1. Mechanical Font Monotony** | Handwriting fonts repeat the identical glyph bitmap/vector for every instance of a letter (e.g., three identical 'e's in a sentence). | **Multi-Sample Caching & Box-Muller Kerning**: Dynamically modulates baseline drift, ligature entry tangents, and 5–15% organic kerning variance across every character instance. |
+| **2. Kinematic Velocity Blindness** | Standard SVG/TrueType curves have constant stroke widths, ignoring the physical relationship between pen velocity, acceleration, and curvature. | **Two-Thirds Power Law Engine**: Modulates instantaneous stroke thickness and ink alpha according to angular velocity $\omega = K \kappa^{2/3}$ and curvature radius $R^{1/3}$. |
+| **3. Biometric Cloud Privacy Leaks** | Online handwriting generator APIs transmit raw handwriting samples and user notes to remote servers, violating GDPR Art. 9, BIPA, and CCPA. | **Zero-Knowledge Encrypted Vault**: Biometric style vectors and glyph caches are encrypted locally with WebCrypto AES-GCM (256-bit) and PBKDF2 (100k iterations) in `dhse-vault`. |
+| **4. Structured Content Incompatibility** | Existing handwriting tools break down when rendering complex academic documents containing math equations, source code, or diagrams. | **Unified Structured AST Pipelines**: Native KaTeX MathML AST decomposition for LaTeX math, monospace jitter grid for code, and Rough.js sketchy vector primitives for flowcharts. |
+| **5. Evaluator Provenance Skepticism** | Institutional department heads and evaluators cannot verify whether a generated submission exhibits the student's authentic personal motor habits. | **Personal Quirks & "Highlight Peculiars" Mode**: Reproduces idiosyncratic habits (European crossed 7/Z, high T-bars, scratch-out typo corrections, signature flourish) with an audit halo review toggle. |
+
+---
+
+## 🏗️ 5-Layer System Architecture
+
+The DHSE platform is partitioned into five strictly isolated architectural layers ensuring zero cloud leakage and maximum client rendering performance:
+
+```mermaid
+graph TB
+    subgraph Layer5 ["🖥️ Layer 5: Ingestion & Studio Sandbox (Ch. 8, 22, 23)"]
+        L5_UI["Interactive Calibration Studio (React 18)"]
+        L5_Imp["Multi-Format Importer (PDF / DOCX / TXT / MD)"]
+        L5_A11y["Accessibility Suite (Tremor Dampening & Switch Scan)"]
+        L5_Plug["Universal Plugin SDK & VSCode Extension"]
+    end
+
+    subgraph Layer4 ["🔐 Layer 4: Style Extraction & Encrypted Vault (Ch. 3, 16, App B.1)"]
+        L4_Ext["Zero-Shot Style Extractor (ViT + SAQ 256-dim)"]
+        L4_Vault["Zero-Knowledge Vault (WebCrypto AES-GCM 256-bit)"]
+        L4_IDB[("IndexedDB Local Persistence: dhse-vault")]
+    end
+
+    subgraph Layer3 ["⚡ Layer 3: Biomechanical Synthesis Core (Ch. 4, 5, 6, 7)"]
+        L3_Kin["Two-Thirds Power Law Kinematics (v = K * R^(1/3))"]
+        L3_Drift["Compound Harmonic Baseline Drift Engine"]
+        L3_Kern["Gaussian Box-Muller Kerning & Jitter Budget"]
+        L3_Lig["Bigram Ligature Matrix & Tangent Bridging"]
+        L3_Quirk["Personal Quirks & Authentic Hallmarks Engine"]
+        L3_Bezi["Schneider Cubic Bézier Least-Squares Vectorizer"]
+    end
+
+    subgraph Layer2 ["📐 Layer 2: Structured Content Rendering (Ch. 9, 10, 11)"]
+        L2_Math["LaTeX Pipeline (KaTeX MathML AST Traversal)"]
+        L2_Code["Code Blocks (Monospace Jitter Grid & Syntax Colors)"]
+        L2_Diag["Diagram Sketcher (Rough.js Flowchart DSL Parser)"]
+    end
+
+    subgraph Layer1 ["🎨 Layer 1: Realism Studio & Physical Continuation (Ch. 12, 13, 14, 15, 17)"]
+        L1_Inst["Multi-Instrument Physics (Ballpoint, Gel, Fountain, Pencil, Marker)"]
+        L1_3D["Three.js 3D Binding Warp & Environmental Realism Mesh"]
+        L1_Rect["Homography 4-Corner Rectification & Bilateral Lighting"]
+        L1_Hough["Hough Ruled Line Detection & HPP Text Segmentation"]
+        L1_Water["Steganographic Micro-Kerning & DWT Watermark"]
+        L1_PDF["High-DPI Multi-Page PDF Exporter (jsPDF)"]
+    end
+
+    L5_Imp --> L5_UI
+    L5_UI --> L4_Ext
+    L4_Ext --> L4_Vault
+    L4_Vault <--> L4_IDB
+    L4_Vault --> L3_Kin
+    L3_Kin --> L3_Drift
+    L3_Drift --> L3_Kern
+    L3_Kern --> L3_Lig
+    L3_Lig --> L3_Quirk
+    L3_Quirk --> L3_Bezi
+    L5_UI --> L2_Math
+    L5_UI --> L2_Code
+    L5_UI --> L2_Diag
+    L2_Math --> L3_Bezi
+    L2_Code --> L3_Bezi
+    L2_Diag --> L3_Bezi
+    L3_Bezi --> L1_Inst
+    L1_Inst --> L1_3D
+    L1_Inst --> L1_Water
+    L1_Water --> L1_PDF
 ```
 
-### 2. Run the Interactive Web Sandbox
+---
+
+## 🔄 Kinematic & Synthesis Pipelines
+
+### 1. Biomechanical Motor Kinematics & Two-Thirds Power Law Pipeline
+
+Every stroke drawn by DiffusionPen undergoes continuous physical acceleration and velocity modulation to replicate human hand motor dynamics:
+
+```mermaid
+graph LR
+    subgraph Input_Text ["1. Input Stream"]
+        RawText["Unicode Text / LaTeX / Markdown"]
+    end
+
+    subgraph Neuromotor ["2. Neuromotor Modulation"]
+        GlyphSelect["Glyph Variant Selection (Multi-Sample Cache)"]
+        PowerLaw["Two-Thirds Power Law (ω = K * κ^(2/3))"]
+        PressureMod["Curvature-Dependent Pen Pressure Modulation"]
+        DriftSim["Compound Sine Baseline Drift (A1*sin(ω1*x) + A2*sin(ω2*x))"]
+        KerningJitter["Gaussian Box-Muller Kerning Variance"]
+    end
+
+    subgraph Vectorization ["3. Vector Geometry"]
+        LigatureGen["Bigram Cursive Tangent Bridging"]
+        QuirkInject["Personal Motor Quirks Injection (7/Z, t-bar, i-dot)"]
+        RDP["Ramer-Douglas-Peucker Polyline Simplification"]
+        SchneiderFit["Schneider Least-Squares Cubic Bézier Fitting"]
+    end
+
+    subgraph Rendering ["4. Physical Deposition"]
+        InstrumentPhysics["Fluid / Graphite Physical Deposition Layer"]
+        CanvasOutput["High-Precision Vector Stroke Splines"]
+    end
+
+    RawText --> GlyphSelect
+    GlyphSelect --> PowerLaw
+    PowerLaw --> PressureMod
+    PressureMod --> DriftSim
+    DriftSim --> KerningJitter
+    KerningJitter --> LigatureGen
+    LigatureGen --> QuirkInject
+    QuirkInject --> RDP
+    RDP --> SchneiderFit
+    SchneiderFit --> InstrumentPhysics
+    InstrumentPhysics --> CanvasOutput
+```
+
+### 2. Multi-Format Document Ingestion to Multi-Page PDF Lifecycle
+
+Seamlessly transition from academic drafts (`.pdf`, `.docx`, `.txt`, `.md`) to live interactive Page 1 previews, and finally to publication-grade multi-page handwritten PDFs:
+
+```mermaid
+stateDiagram-v2
+    [*] --> IngestFile: Upload PDF / DOCX / TXT / Markdown
+    
+    state IngestFile {
+        PDF_Parsing: Extract text via pdfjs-dist
+        DOCX_Parsing: Extract body via mammoth.js
+        Raw_Parsing: Extract plain text & markdown tokens
+    }
+    
+    IngestFile --> LiveSamplePreview: Generate Instant Page 1 Live Sample
+    
+    state LiveSamplePreview {
+        ParseTokens: Lex text into structural paragraphs
+        RenderPage1: Biomechanical rendering in Studio Viewport
+        QuirkAudit: Annotate personal quirks if highlighted
+    }
+
+    LiveSamplePreview --> ParameterRefinement: User adjusts font size, slant, spacing, stationery
+    ParameterRefinement --> MultiPagePagination: Trigger Multi-Page Handwritten PDF Export
+
+    state MultiPagePagination {
+        LineWrapBudget: Compute printable width & baseline step
+        PageBreakSplit: Paginate text chunks across standard pages
+        TemplateBackground: Draw authentic ruled, grid, or legal guidelines
+        RenderStrokes: Synthesize handwritten Bézier vector strokes
+        InjectWatermark: Embed steganographic anti-forgery micro-kerning
+    }
+
+    MultiPagePagination --> DownloadPDF: Export publication-ready multi-page PDF
+    DownloadPDF --> [*]
+```
+
+### 3. Personal Quirks & Evaluator Verification Architecture
+
+Ensures that student assignments and research write-ups reflect individual handwriting quirks, complete with an institutional audit mode for department heads:
+
+```mermaid
+graph TD
+    subgraph Motor_Habits ["👤 Individual Motor Quirks Configuration"]
+        Q1["European Crossed '7' & 'Z' (Horizontal Crossbars)"]
+        Q2["High & Looped 't'-Bar Crossbars"]
+        Q3["Idiosyncratic 'i'-Dotting (Open Circle, Slash, Circle)"]
+        Q4["Human Scratch-Out Typo Corrections (~~strikethrough~~)"]
+        Q5["Wavy Organic Section Underlines"]
+        Q6["Personal Wet-Ink Signature Seal Block"]
+    end
+
+    subgraph DHSE_Core ["⚙️ DHSE Synthesis Core"]
+        QuirkEngine["PersonalQuirksEngine (Motor Pattern Matcher)"]
+        StrokeInjector["Kinematic Vector Path Injector"]
+    end
+
+    subgraph Evaluator_Mode ["🔍 Evaluator Provenance Audit ('Highlight Peculiars')"]
+        AuditToggle{"'Highlight Peculiars' Active?"}
+        HaloRenderer["Render Dashed Annotation Halos"]
+        BadgeRenderer["Overlay Motor Trait Badges (e.g. 'Crossed-7', 'High-T')"]
+        CleanRender["Render Clean Authentic Document"]
+    end
+
+    subgraph Output_Review ["🎓 Institutional Review & Verification"]
+        ProfReview["Department Head / Evaluator Assessment"]
+        VerificationCheck["Physical Authorship Confirmed via Biometric Hallmarks"]
+    end
+
+    Q1 --> QuirkEngine
+    Q2 --> QuirkEngine
+    Q3 --> QuirkEngine
+    Q4 --> QuirkEngine
+    Q5 --> QuirkEngine
+    Q6 --> QuirkEngine
+
+    QuirkEngine --> StrokeInjector
+    StrokeInjector --> AuditToggle
+
+    AuditToggle -->|"Toggle ON"| HaloRenderer
+    AuditToggle -->|"Toggle ON"| BadgeRenderer
+    AuditToggle -->|"Toggle OFF"| CleanRender
+
+    HaloRenderer --> ProfReview
+    BadgeRenderer --> ProfReview
+    CleanRender --> ProfReview
+    ProfReview --> VerificationCheck
+```
+
+### 4. Structured Content Decomposition Engine
+
+Transforms academic LaTeX mathematics, monospaced programming code, and flowchart DSLs into natural handwritten vector elements:
+
+```mermaid
+graph TB
+    subgraph Input_Stream ["Structured Content Input"]
+        InMath["LaTeX Math Equation: $\int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$"]
+        InCode["Code Block: def forward(self, x): return F.relu(x)"]
+        InDiag["Flowchart DSL: [Start] -> <Decision> -> (End)"]
+    end
+
+    subgraph Parser_Layer ["AST Deconstruction & Lexical Analysis"]
+        KaTeX_AST["KaTeX MathML AST Walker & Symbol Registry"]
+        Code_Tokenizer["Language Lexer (Keywords, Identifiers, Strings)"]
+        Rough_DSL["Rough.js Flowchart DSL Parser"]
+    end
+
+    subgraph Vector_Mapping ["Biomechanical Vector Generation"]
+        Math_Vectors["Greek, Integral & Fraction Spline Mapping"]
+        Code_Grid["Monospace Organic Jitter Grid + Syntax Inks"]
+        Sketch_Primitives["Hand-Drawn Rectangle, Rhombus & Arrow Vectors"]
+    end
+
+    subgraph Output_Canvas ["Unified Studio Canvas Deposition"]
+        CanvasDraw["Cohesive Handwritten Synthesis Viewport"]
+    end
+
+    InMath --> KaTeX_AST
+    InCode --> Code_Tokenizer
+    InDiag --> Rough_DSL
+
+    KaTeX_AST --> Math_Vectors
+    Code_Tokenizer --> Code_Grid
+    Rough_DSL --> Sketch_Primitives
+
+    Math_Vectors --> CanvasDraw
+    Code_Grid --> CanvasDraw
+    Sketch_Primitives --> CanvasDraw
+```
+
+### 5. Zero-Knowledge Client Vault & Steganographic Watermark Lifecycle
+
+Protects user biometric data via hardware-grade client cryptography while providing cryptographic forensic defense against signature forgery:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Researcher / User
+    participant Studio as DHSE Studio UI
+    participant Vault as EncryptedVault (Client)
+    participant IDB as IndexedDB (dhse-vault)
+    participant Steg as WatermarkEmbedder
+    participant Evaluator as Institutional Reviewer
+
+    User->>Studio: Enter Passphrase & Calibration Handwriting
+    Studio->>Vault: initialize(passphrase)
+    Vault->>Vault: PBKDF2 Key Derivation (100k iterations, SHA-256)
+    Vault->>Vault: AES-GCM 256-bit Key Derivation
+    Vault->>IDB: Persist Encrypted Style Vector & Glyph Cache
+    Note over Vault,IDB: 100% Client-Side. Zero Cloud Upload.
+
+    User->>Studio: Export Multi-Page Handwritten Document
+    Studio->>Steg: embedWatermark(strokes, metadata)
+    Steg->>Steg: Compute Spatial Micro-Kerning Shifts (0.2 - 0.4px)
+    Steg->>Steg: DWT High-Frequency Wavelet Steganography
+    Steg-->>Studio: Watermarked Document Vectors
+    Studio-->>User: Download Signed Handwritten PDF
+
+    User->>Evaluator: Submit Handwritten Assignment / Paper
+    Evaluator->>Steg: verifyWatermark(document)
+    Steg-->>Evaluator: Valid Signature: User Hash + Nonce + Timestamp
+    Note over Evaluator,Steg: Defeats TS-GATR Signature Forgery Attacks
+```
+
+---
+
+## 📊 Feature Comparison Matrix
+
+| Feature Dimension | DiffusionPen (DHSE v2.0) | Commercial Handwriting Fonts | Online Cloud Generators | Diffusion Vision / ControlNet |
+| :--- | :---: | :---: | :---: | :---: |
+| **100% Zero-Knowledge Client Privacy** | ✅ **Yes (AES-GCM IndexedDB)** | ⚠️ Font files local | ❌ **Cloud upload** | ❌ **Cloud GPU required** |
+| **Two-Thirds Power Law Motor Physics** | ✅ **Yes ($\omega = K \kappa^{2/3}$)** | ❌ None | ❌ None | ⚠️ Statistical only |
+| **Organic Baseline Drift Simulation** | ✅ **Yes (Harmonic Compound)** | ❌ None | ⚠️ Simple offset | ⚠️ Implicit |
+| **Schneider Least-Squares Cubic Béziers**| ✅ **Yes (High Precision)** | ❌ Pre-baked glyphs | ❌ Raster / Canvas | ❌ Pixel-level only |
+| **LaTeX Math Formula AST Rendering** | ✅ **Yes (KaTeX MathML)** | ❌ None | ❌ None | ❌ Prone to hallucinations |
+| **Rough.js Flowchart DSL Sketching** | ✅ **Yes (`[A] -> <B>`)** | ❌ None | ❌ None | ⚠️ Visual distortion |
+| **Personal Quirks & Peculiar Highlights** | ✅ **Yes (Crossed 7/Z, t-bar)** | ❌ None | ❌ None | ❌ None |
+| **Evaluator Institutional Verification** | ✅ **Yes (Visual Halo Mode)** | ❌ None | ❌ None | ❌ None |
+| **Anti-Forgery Steganographic Watermark** | ✅ **Yes (Spatial + DWT)** | ❌ None | ❌ None | ❌ None |
+| **Multi-Format Ingestion (PDF / DOCX)** | ✅ **Yes (`pdfjs` + `mammoth`)**| ❌ Text only | ⚠️ Text only | ❌ Image only |
+| **Multi-Page Vector PDF Export** | ✅ **Yes (High-DPI `jsPDF`)** | ❌ Manual | ⚠️ Flattened raster | ⚠️ Raster PDF |
+| **Three.js 3D Notebook Environmental Realism** | ✅ **Yes ($z = -0.04x^2$)** | ❌ None | ❌ None | ⚠️ 2D prompt only |
+
+---
+
+## 📚 27-Chapter Implementation Matrix
+
+Every single chapter of the 83-page DHSE Master Architecture blueprint is implemented with rigorous precision:
+
+| Chapter | Component & Subsystem | Primary Implementation | Architectural Scope |
+|---|---|---|---|
+| **Ch. 1 & 2** | System Foundations & Zero-Knowledge Contract | [`src/types/engine.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/types/engine.ts) | 5-layer contracts, biometric isolation invariant |
+| **Ch. 3** | Zero-Shot Style Extractor | [`src/extractor/StyleExtractor.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/extractor/StyleExtractor.ts) | 256-dim style vector, SAQ quantization, multi-sample glyph caching |
+| **Ch. 4** | Ligature & Connection Engine | [`src/engine/LigatureEngine.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/engine/LigatureEngine.ts) | Bigram transition probability matrix, cursive bridge entry/exit angle tangents |
+| **Ch. 5** | Natural Imperfections & Baseline Drift | [`src/engine/NaturalImperfections.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/engine/NaturalImperfections.ts) | Compound sine baseline drift, Box-Muller kerning, 5–15% variance threshold |
+| **Ch. 6** | Kinematic Realism & Pressure Dynamics | [`src/engine/PowerLawModulator.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/engine/PowerLawModulator.ts) | Two-Thirds Power Law ($\omega = K \kappa^{2/3}$), velocity-to-pressure modulation |
+| **Ch. 7** | Bézier Path Vectorization | [`src/engine/BezierFitter.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/engine/BezierFitter.ts) | RDP simplification + Schneider least-squares cubic Bézier curve fitting |
+| **Ch. 8** | Interactive Calibration Sandbox | [`src/sandbox/SandboxApp.tsx`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/sandbox/SandboxApp.tsx) | Live calibration drawing canvas, parameter rail, real-time A/B viewport |
+| **Ch. 8.1** | Multi-Format Document Ingestion | [`src/importers/FileImporter.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/importers/FileImporter.ts) | Client-side `.pdf` (`pdfjs-dist`), `.docx` (`mammoth`), `.txt`, `.md` parser with Page 1 preview |
+| **Ch. 8.2** | Personal Quirks & Evaluator Verification | [`src/engine/PersonalQuirks.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/engine/PersonalQuirks.ts) | Crossed 7/Z, high T-bars, scratch-out typo corrections, signature flourish, audit halos |
+| **Ch. 8.3** | High-DPI Multi-Page PDF Exporter | [`src/export/PdfExporter.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/export/PdfExporter.ts) | Paginated vector PDF export (`jsPDF`) with authentic ruled paper templates & metadata |
+| **Ch. 9** | LaTeX Math Formula Pipeline | [`src/structured/LatexRenderer.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/structured/LatexRenderer.ts) | KaTeX MathML AST walker, Greek symbol mapper, fraction & integral vector layouts |
+| **Ch. 10** | Monospace Code Block Handling | [`src/structured/CodeBlockHandler.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/structured/CodeBlockHandler.ts) | Language tokenizer, monospace organic jitter grid, syntax ink coloring |
+| **Ch. 11** | Diagram Sketching Engine | [`src/structured/DiagramSketcher.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/structured/DiagramSketcher.ts) | Rough.js flowchart DSL parser (`[A] -> <B> -> (C)`), sketchy vector primitives |
+| **Ch. 12** | Physical Continuation & Rectification | [`src/continuation/DocumentRectifier.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/continuation/DocumentRectifier.ts) | 4-corner homography matrix warping, bilateral illumination normalization |
+| **Ch. 13** | Ruled Line Detection & HPP Segmentation | [`src/continuation/LineDetector.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/continuation/LineDetector.ts) | Hough line transform $(\rho, \theta)$, Horizontal Projection Profile text line segmentation |
+| **Ch. 14** | Multi-Instrument Physics | [`src/realism/InstrumentModels.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/realism/InstrumentModels.ts) | Ballpoint (striations/skips), Gel (bleed halo), Fountain (nib flex), Pencil (grain) |
+| **Ch. 15** | Environmental Realism & 3D Lighting | [`src/realism/WebGLScene.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/realism/WebGLScene.ts) | Three.js 3D binding warp mesh ($z = -0.04(x+0.5)^2$), desk lamp lighting, coffee stains |
+| **Ch. 16** | Zero-Knowledge Vault Persistence | [`src/vault/EncryptedVault.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/vault/EncryptedVault.ts) | WebCrypto AES-GCM (256-bit), PBKDF2 (100k iterations), IndexedDB persistence |
+| **Ch. 17** | Ethical Micro-Watermarking | [`src/security/WatermarkEmbedder.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/security/WatermarkEmbedder.ts) | Spatial micro-kerning & DWT steganography, TS-GATR signature fraud defense |
+| **Ch. 18** | Evaluation & QA Benchmarks | [`mlops/eval_harness.py`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/mlops/eval_harness.py) | Character Error Rate (CER), Word Error Rate (WER), Handwriting Distance (HWD) |
+| **Ch. 19** | MLOps & Quantization Pipeline | [`mlops/train_vit_saq.py`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/mlops/train_vit_saq.py), [`quantize.py`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/mlops/quantize.py) | PyTorch contrastive training script, ONNX INT8 dynamic quantizer (660 MB $\to$ 41 MB) |
+| **Ch. 20** | Hybrid Cloud & Edge Deployment | [`src/sw/service-worker.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/sw/service-worker.ts), [`deploy/k8s/`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/deploy/k8s/) | Workbox PWA caching, FastAPI license server, Kubernetes production manifests |
+| **Ch. 21** | Security Threat Model & Compliance | [`docs/THREAT_MODEL.md`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/docs/THREAT_MODEL.md) | STRIDE analysis, GDPR Art 9 / BIPA / CCPA / DPDP compliance matrix |
+| **Ch. 22** | Universal Plugin SDK | [`src/plugins/DHSEPlugin.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/plugins/DHSEPlugin.ts), [`VSCodePlugin.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/plugins/VSCodePlugin.ts) | Universal plugin interfaces, VSCode companion extension implementation |
+| **Ch. 23** | Accessibility Deep-Dive | [`src/a11y/AccessibilityEngine.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/a11y/AccessibilityEngine.ts) | Dysgraphia tremor stabilizer, 1.5s switch-control scanner, WCAG 2.2 AA audit pass |
+| **Ch. 24** | Monetization & Economics | [`docs/MONETIZATION.md`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/docs/MONETIZATION.md), [`src/types/pricing.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/types/pricing.ts) | Pricing tiers, unit economics (Pro LTV/CAC 11.7x), developer REST API |
+| **Ch. 25** | Automated Testing Strategy | [`tests/`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/tests/), [`package.json`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/package.json) | Vitest automated unit testing pyramid (18/18 tests passing) |
+| **Ch. 26** | 18-Month Strategic Roadmap | [`docs/ROADMAP.md`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/docs/ROADMAP.md) | Q1–Q6 quarterly milestone tracking across edge deployment and hardware support |
+| **Ch. 27** | Top-15 Risk Register | [`docs/RISKS.md`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/docs/RISKS.md) | Comprehensive security, technical, and regulatory risk mitigations |
+| **App. A** | Public APIs & REST Endpoints | [`src/engine/DHSEEngine.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/engine/DHSEEngine.ts), [`server/main.py`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/server/main.py) | Universal JavaScript SDK client & FastAPI REST license server |
+| **App. B** | Storage Schemas | [`src/types/vault.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/types/vault.ts), [`server/schema.sql`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/server/schema.sql) | IndexedDB `dhse-vault` & Cloud Postgres relational database schemas |
+| **App. C** | Academic Bibliography | [`docs/REFERENCES.md`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/docs/REFERENCES.md) | Complete literature citations (Graves, CONSTANT, DiffusionPen, Lacquaniti, Viviani) |
+
+---
+
+## 🖋️ Studio Features & Peculiar Hallmarks
+
+### 1. Multi-Format Ingestion with Live Page 1 Preview
+- **Supported Formats**: Ingest `.pdf`, `.docx`, `.txt`, and `.md` files directly in the browser via drag & drop.
+- **Zero-Network Ingestion**: Text extraction is handled exclusively on the client device through `pdfjs-dist` and `mammoth.js`.
+- **Instant Page 1 Sample**: The studio immediately renders the first page in the active handwriting style, allowing instant visual feedback on font scale, line spacing, and slant adjustments before generating the full document.
+
+### 2. Personal Quirks & Evaluator Verification ("Highlight Peculiars")
+Human handwriting is defined by subtle habits developed over decades of motor muscle memory. DiffusionPen allows users to configure and inject authentic personal motor habits:
+- **European Crossed '7' and 'Z'**: Adds distinctive middle horizontal strokes characteristic of STEM and European writers.
+- **High & Looped 't'-Bars**: Renders elevated, sweeping, or looped crossbars across all 't' characters.
+- **Custom 'i'-Dot Gestures**: Replaces standard round dots with open circle loops, rapid diagonal ticks, or deliberate ink pools.
+- **Authentic Typo Scratch-Outs**: Replaces strikethrough markup (`~~word~~`) with realistic double-loop scribble scratch-outs.
+- **Wet-Ink Signature Seal Block**: Appends a personalized cursive signature flourish with date stamp and verification hash.
+- **Evaluator Audit Mode**: Toggling **"Highlight Peculiars"** in the UI renders subtle dashed verification rings and trait badges around these quirks, enabling department heads, evaluators, and academic reviewers to confirm the authentic physical motor signature of the author.
+
+### 3. Stationery Templates & Multi-Page PDF Exporter
+- **Stationery Paper Templates**:
+  - `College Ruled Notebook`: Authentic light blue horizontal rules with pink vertical margin line.
+  - `Engineering Grid Paper`: Subtle Cartesian millimeter coordinate grid.
+  - `Legal Pad`: Classic Canary yellow background with 34pt legal rules and dual margin bars.
+  - `Dotted Bullet Journal`: Precise 5mm isometric dotted matrix.
+  - `Blank Fine Parchment`: Clean organic parchment texture for unruled writing.
+- **High-DPI Multi-Page PDF Export**: Compiles paginated, vector-smooth handwritten pages using `jsPDF` with automatic page-break calculations, margin padding, and embedded steganographic verification watermarks.
+
+---
+
+## 🚀 Quickstart & Local Execution
+
+### Prerequisites
+- **Node.js** (v18.0.0 or higher)
+- **npm** (v9.0.0 or higher)
+- **Python** (v3.10+ for optional MLOps and FastAPI license server)
+
+---
+
+### Step 1: Install Dependencies
+```bash
+# Clone the repository
+git clone https://github.com/sepas1609/DiffusionPen.git
+cd DiffusionPen
+
+# Install Node dependencies
+npm install
+
+# (Optional) Install Python MLOps & FastAPI dependencies
+pip install fastapi uvicorn pydantic torch onnx onnxruntime
+```
+
+---
+
+### Step 2: Run the Interactive Web Studio
+
+Start the local Vite development server:
 ```bash
 npm run dev
 ```
-Navigate to `http://localhost:5173` to explore the live interactive studio.
 
-### 3. Run Automated Tests
+The studio will be available at:
+> 🌐 **Frontend Studio URL:** **`http://localhost:5173`**  
+> *(Also accessible via `http://127.0.0.1:5173` or your local LAN IP address printed in the terminal).*
+
+If port `5173` is already in use by another application on your system, specify a custom port:
 ```bash
-npm test
+npm run dev -- --port 3000 --host
 ```
-Executes all 18 unit tests across the biomechanical motor simulation, encrypted vault, structured content pipelines, personal quirks, and steganographic watermarking.
-
-### 4. Build Production Bundle
-```bash
-npm run build
-```
-
-### 5. Run Python Evaluation & MLOps Suite
-```bash
-# Evaluate HTR metrics (CER, WER, HWD)
-python3 mlops/eval_harness.py --ref "Handwritten equation" --hyp "Handwritten equation"
-
-# Run MLOps training simulation
-python3 mlops/train_vit_saq.py --dry-run
-
-# Run ONNX INT8 dynamic quantization pipeline
-python3 mlops/quantize.py
-```
-
-### 6. Run FastAPI Cloud License & Watermark Server
-```bash
-python3 server/main.py
-```
-API endpoints available at `http://localhost:8080/docs`.
 
 ---
 
-## License & Compliance
-Built under the zero-knowledge client privacy invariant. No biometric information leaves the user's local device without explicit user cryptographic export.
+### Step 3: Run Automated Unit Tests
+
+Execute the Vitest test suite to verify the mathematical motor simulation, encrypted vault, structured pipelines, personal quirks, and steganographic watermarking:
+```bash
+npm test
+```
+*Executes all 18 unit tests across 5 test suites with 100% pass rate.*
+
+---
+
+### Step 4: Build Production Distribution
+```bash
+npm run build
+npm run preview
+```
+Compiles optimized TypeScript and React bundles into `dist/` with ESNext target.
+
+---
+
+### Step 5: (Optional) Run FastAPI License & Watermark Verification Server
+
+To run the cloud license and watermark verification REST API:
+```bash
+python3 server/main.py
+```
+By default, the server listens on port **8000**:
+> 📖 **Interactive Swagger API Docs:** **`http://localhost:8000/docs`**  
+> *(To run on a custom port, pass `PORT=8080 python3 server/main.py`).*
+
+---
+
+### Step 6: (Optional) Run MLOps Evaluation & Quantization Pipeline
+```bash
+# 1. Run HTR metric evaluation harness (CER, WER, HWD)
+python3 mlops/eval_harness.py --ref "Handwritten equation" --hyp "Handwritten equation"
+
+# 2. Run distributed ViT+SAQ training simulation
+python3 mlops/train_vit_saq.py --dry-run
+
+# 3. Run ONNX INT8 dynamic quantization (660 MB -> 41 MB)
+python3 mlops/quantize.py
+```
+
+---
+
+## 🏛️ Laboratory & Department Hosting
+
+DiffusionPen is designed for strict **zero-knowledge, local-first data privacy**. To host DiffusionPen across a university laboratory, research cluster, or hospital intranet without exposing handwritten manuscripts to external networks:
+
+### Local Intranet / Campus Workstation Server
+```bash
+# Build the production bundle
+npm run build
+
+# Host on campus workstation / lab intranet
+npx vite preview --host 0.0.0.0 --port 5173
+```
+*Access securely within your department LAN (e.g., `http://192.168.x.x:5173` or `http://localhost:5173`). No internet connection, cloud API key, or third-party telemetry is required.*
+
+---
+
+## 🔒 Security Threat Model & Zero-Knowledge Guarantee
+
+DiffusionPen operates under an inviolable **Zero-Knowledge invariant**:
+- **Client-Side Key Derivation**: PBKDF2 generates keys with 100,000 SHA-256 iterations strictly in client memory.
+- **Hardware-Isolated Storage**: All biometric style vectors, glyph variants, and user profiles are encrypted using AES-GCM (256-bit) and stored in browser-origin `IndexedDB`.
+- **Zero Cloud Ingestion**: Raw user handwriting samples, assignments, and notes never touch external networks.
+- **Compliance Matrix**: Fully aligned with **GDPR Article 9** (biometric special category data), **Illinois BIPA § 15**, **California CCPA/CPRA**, and **India DPDP Act 2023**.
+
+---
+
+## 📄 Academic Citation
+
+If you utilize **DiffusionPen (DHSE v2.0)** in your academic research, computer vision experiments, or university coursework, please cite this work:
+
+```bibtex
+@software{boddu2026diffusionpen,
+  author       = {Boddu, Saran and DHSE Open Research Group},
+  title        = {DiffusionPen (DHSE v2.0): Biomechanically-Faithful Zero-Knowledge Digital Handwriting Synthesis Platform},
+  year         = {2026},
+  publisher    = {GitHub},
+  journal      = {GitHub repository},
+  howpublished = {\url{https://github.com/sepas1609/DiffusionPen}},
+  version      = {2.0.0}
+}
+```
+
+---
+
+## 📜 License
+
+This project is open-source software licensed under the **[MIT License](LICENSE)**.
+
+Developed with precision by **[Saran Boddu](https://github.com/sepas1609)** for researchers, students, and engineers worldwide.
