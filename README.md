@@ -87,7 +87,7 @@ Unlike heuristic font renderers or statistical pixel-space diffusion models, **D
 ### 4. KaTeX MathML AST Decomposition for LaTeX Mathematics
 - **The Generative Math Failure**: Pure diffusion image-to-image models hallucinate mathematical notation—breaking fraction bars, confusing subscripts with standard glyphs, and distorting Greek symbols.
 - **AST Structural Mapping**: DiffusionPen walks the KaTeX MathML Abstract Syntax Tree (AST), decomposing mathematical equations into structural nodes:
-  $$\text{AST} \longrightarrow \left\{\text{Radicals } \sqrt{\cdot}, \text{ Fractions } \frac{a}{b}, \text{ Integrals } \int, \text{ Greek Symbols } \alpha, \beta, \gamma, \text{ Super/Subscripts}\right\}$$
+  $$\text{AST} \longrightarrow \left\lbrace \text{Radicals } \sqrt{\cdot}, \, \text{Fractions } \frac{a}{b}, \, \text{Integrals } \int, \, \text{Greek Symbols } \alpha, \beta, \gamma, \, \text{Super/Subscripts} \right\rbrace$$
   Each mathematical node is mapped to organic continuous Bézier spline paths with strict bounding-box alignment along the equation baseline, preserving absolute mathematical correctness while rendering with natural pen imperfections.
 
 ### 5. Dual-Domain Anti-Forgery Steganographic Watermarking
@@ -274,10 +274,10 @@ graph TD
         StrokeInjector["Kinematic Vector Path Injector"]
     end
 
-    subgraph Evaluator_Mode ["🔍 Evaluator Provenance Audit ('Highlight Peculiars')"]
-        AuditToggle{"'Highlight Peculiars' Active?"}
+    subgraph Evaluator_Mode ["🔍 Evaluator Provenance Audit - Highlight Peculiars"]
+        AuditToggle{"Highlight Peculiars Active?"}
         HaloRenderer["Render Dashed Annotation Halos"]
-        BadgeRenderer["Overlay Motor Trait Badges (e.g. 'Crossed-7', 'High-T')"]
+        BadgeRenderer["Overlay Motor Trait Badges (Crossed-7, High-T)"]
         CleanRender["Render Clean Authentic Document"]
     end
 
@@ -313,7 +313,7 @@ Transforms academic LaTeX mathematics, monospaced programming code, and flowchar
 ```mermaid
 graph TB
     subgraph Input_Stream ["Structured Content Input"]
-        InMath["LaTeX Math Equation: $\int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$"]
+        InMath["LaTeX Math Equation: Integral exp(-x^2) dx = sqrt(pi) / 2"]
         InCode["Code Block: def forward(self, x): return F.relu(x)"]
         InDiag["Flowchart DSL: [Start] -> <Decision> -> (End)"]
     end
@@ -428,7 +428,7 @@ Every single chapter of the 83-page DHSE Master Architecture blueprint is implem
 | **Ch. 16** | Zero-Knowledge Vault Persistence | [`src/vault/EncryptedVault.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/vault/EncryptedVault.ts) | WebCrypto AES-GCM (256-bit), PBKDF2 (100k iterations), IndexedDB persistence |
 | **Ch. 17** | Ethical Micro-Watermarking | [`src/security/WatermarkEmbedder.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/security/WatermarkEmbedder.ts) | Spatial micro-kerning & DWT steganography, TS-GATR signature fraud defense |
 | **Ch. 18** | Evaluation & QA Benchmarks | [`mlops/eval_harness.py`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/mlops/eval_harness.py) | Character Error Rate (CER), Word Error Rate (WER), Handwriting Distance (HWD) |
-| **Ch. 19** | MLOps & Quantization Pipeline | [`mlops/train_vit_saq.py`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/mlops/train_vit_saq.py), [`quantize.py`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/mlops/quantize.py) | PyTorch contrastive training script, ONNX INT8 dynamic quantizer (660 MB $\to$ 41 MB) |
+| **Ch. 19** | MLOps & Quantization Pipeline | [`mlops/train_vit_saq.py`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/mlops/train_vit_saq.py), [`quantize.py`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/mlops/quantize.py) | PyTorch contrastive training script, ONNX INT8 dynamic quantizer (660 MB → 41 MB) |
 | **Ch. 20** | Hybrid Cloud & Edge Deployment | [`src/sw/service-worker.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/sw/service-worker.ts), [`deploy/k8s/`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/deploy/k8s/) | Workbox PWA caching, FastAPI license server, Kubernetes production manifests |
 | **Ch. 21** | Security Threat Model & Compliance | [`docs/THREAT_MODEL.md`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/docs/THREAT_MODEL.md) | STRIDE analysis, GDPR Art 9 / BIPA / CCPA / DPDP compliance matrix |
 | **Ch. 22** | Universal Plugin SDK | [`src/plugins/DHSEPlugin.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/plugins/DHSEPlugin.ts), [`VSCodePlugin.ts`](file:///Users/saranboddu/Desktop/Amrita/Extra/DiffusionPen/src/plugins/VSCodePlugin.ts) | Universal plugin interfaces, VSCode companion extension implementation |
@@ -457,11 +457,11 @@ The DiffusionPen Studio interface is engineered for frictionless calibration, ze
 
 #### Usability Engineering & Workflow:
 - **Dual-Pane Interaction**:
-  - **Left Source Editor**: Real-time structured text input supporting standard Markdown headings, LaTeX mathematics (`$\int_0^\infty ...$`), syntax-highlighted code blocks (` ```python ... ``` `), and Rough.js flowchart DSLs (`[Start] -> <Decision> -> (End)`).
+  - **Left Source Editor**: Real-time structured text input supporting standard Markdown headings, LaTeX mathematics ($\int_0^\infty e^{-x^2} dx$), syntax-highlighted code blocks (Python, TypeScript, SQL), and Rough.js flowchart DSLs (`[Start] -> <Decision> -> (End)`).
   - **Center Viewport (Biomechanical Canvas)**: Renders vector strokes in real-time at 60 FPS using HTML5 2D Canvas and SVG path compositing. Features interactive zoom presets (**75%**, **100%**, **125%**) and pagination controls (**< Page 1 of N >**).
 - **Dynamic Parameter Rail (Right Sidebar)**:
   - **Font Scale (12pt – 48pt)**: Dynamically adjusts line height budgets and Schneider Bézier coordinate scaling.
-  - **Cursive Slant Angle (-25° to +25°)**: Controls forward or backward angular shearing matrix $\begin{bmatrix} 1 & \tan\theta \\ 0 & 1 \end{bmatrix}$.
+  - **Cursive Slant Angle (-25° to +25°)**: Controls forward or backward angular shearing transformation matrix $S(\theta) = [1, \, \tan\theta; \, 0, \, 1]$.
   - **Baseline Drift & Kerning Variance (0% – 30%)**: Modulates the amplitude of the compound harmonic sine wave and Box-Muller Gaussian kerning jitter.
   - **Stationery Template Selector**: Instant 1-click switching across **Notebook**, **Engineering Grid**, **Legal Pad**, **Dotted Journal**, and **Blank Fine Parchment**.
   - **Writing Instrument Physics**: Select between **Ballpoint Pen** (slight striations and skips), **Gel Pen** (smooth capillary ink bleed), **Fountain Pen** (flexible nib pressure variations), **Graphite Pencil** (subtle paper grain friction), and **Chisel Highlighter** (translucent fluorescent overlay).
