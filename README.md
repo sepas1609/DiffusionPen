@@ -17,7 +17,7 @@
   <b>A zero-knowledge client-heavy handwriting synthesis engine mathematically grounded in the Two-Thirds Power Law, cubic Bézier path vectorization, KaTeX AST structured parsing, Three.js 3D environmental realism, authentic personal quirks, and steganographic anti-forgery watermarking.</b>
 </p>
 
-[Overview](#-overview--scientific-foundations) • [Architecture](#-5-layer-system-architecture) • [Pipelines & Flowcharts](#-kinematic--synthesis-pipelines) • [Comparison](#-feature-comparison-matrix) • [Chapter Matrix](#-27-chapter-implementation-matrix) • [Studio & Quirks](#-studio-features--peculiar-hallmarks) • [Quickstart](#-quickstart--local-execution) • [Hosting](#-laboratory--department-hosting) • [Citation](#-academic-citation)
+[Overview](#-overview--scientific-foundations) • [Novelties](#-core-scientific--architectural-novelties) • [Architecture](#-5-layer-system-architecture) • [Pipelines & Flowcharts](#-kinematic--synthesis-pipelines) • [Visual Walkthrough](#-visual-studio-walkthrough--usability-guide) • [Comparison](#-feature-comparison-matrix) • [Chapter Matrix](#-27-chapter-implementation-matrix) • [Quickstart](#-quickstart--local-execution) • [Hosting](#-laboratory--department-hosting) • [Citation](#-academic-citation)
 
 <br/>
 
@@ -48,6 +48,60 @@ Traditional digital handwriting fonts and simplistic Bézier tools produce visua
 | **3. Biometric Cloud Privacy Leaks** | Online handwriting generator APIs transmit raw handwriting samples and user notes to remote servers, violating GDPR Art. 9, BIPA, and CCPA. | **Zero-Knowledge Encrypted Vault**: Biometric style vectors and glyph caches are encrypted locally with WebCrypto AES-GCM (256-bit) and PBKDF2 (100k iterations) in `dhse-vault`. |
 | **4. Structured Content Incompatibility** | Existing handwriting tools break down when rendering complex academic documents containing math equations, source code, or diagrams. | **Unified Structured AST Pipelines**: Native KaTeX MathML AST decomposition for LaTeX math, monospace jitter grid for code, and Rough.js sketchy vector primitives for flowcharts. |
 | **5. Evaluator Provenance Skepticism** | Institutional department heads and evaluators cannot verify whether a generated submission exhibits the student's authentic personal motor habits. | **Personal Quirks & "Highlight Peculiars" Mode**: Reproduces idiosyncratic habits (European crossed 7/Z, high T-bars, scratch-out typo corrections, signature flourish) with an audit halo review toggle. |
+
+---
+
+## 💡 Core Scientific & Architectural Novelties
+
+Unlike heuristic font renderers or statistical pixel-space diffusion models, **DiffusionPen (DHSE v2.0)** introduces six fundamental scientific and engineering novelties that eliminate the artifacts of digital synthesis while maintaining mathematically rigorous biometric fidelity:
+
+### 1. Two-Thirds Power Law Neuromotor Kinematics
+- **Mathematical Invariant**: Human hand kinematics during handwriting and cursive drawing adhere strictly to the **Two-Thirds Power Law** discovered by Lacquaniti, Terzuolo, & Viviani (1983):
+  $$\omega(t) = K \cdot \kappa(t)^{2/3} \quad \Longleftrightarrow \quad v(t) = K \cdot R(t)^{1/3}$$
+  where:
+  - $\omega(t)$ is the instantaneous angular velocity $(\text{rad/s})$,
+  - $v(t) = \sqrt{\dot{x}(t)^2 + \dot{y}(t)^2}$ is the tangential linear velocity $(\text{mm/s})$,
+  - $\kappa(t) = \frac{|\dot{x}\ddot{y} - \dot{y}\ddot{x}|}{(\dot{x}^2 + \dot{y}^2)^{3/2}}$ is the instantaneous path curvature $(\text{mm}^{-1})$,
+  - $R(t) = 1/\kappa(t)$ is the instantaneous radius of curvature $(\text{mm})$,
+  - $K$ is the individual motor gain constant (calibrated per writer style).
+- **Curvature-Dependent Pen Pressure Modulation**: In biological motor control, high-curvature segments (e.g., sharp loops, apex vertices) cause the hand muscles to decelerate ($v \to \min$), increasing pen contact dwell time and contact pressure:
+  $$P(t) = P_{\text{baseline}} \cdot \left(1 + \beta \cdot \kappa(t)^{1/3}\right)$$
+  DiffusionPen modulates stroke width $W(t)$ and deposition opacity $\alpha(t)$ proportionally to $P(t)$, generating authentic corner ink pooling and dynamic striations. On long, low-curvature strokes, rapid movement leads to physical stroke thinning and subtle drag skips.
+
+### 2. Zero-Knowledge Client-Side Biometric Cryptography
+- **Biometric Isolation**: Hand motor patterns, signature kinematics, and handwriting samples constitute sensitive biometric markers under **GDPR Article 9** (Special Category Biometrics), **Illinois BIPA § 15**, and **California CCPA/CPRA**.
+- **Cryptographic Architecture**: Existing AI platforms transmit raw handwriting samples to cloud GPU clusters. In contrast, DiffusionPen establishes an airtight **Zero-Knowledge client boundary**:
+  $$\text{Key} = \text{PBKDF2}\left(\text{passphrase}, \text{salt}_{256}, \text{iterations}=100{,}000, \text{hash}=\text{SHA-256}\right)$$
+  $$\text{Ciphertext} = \text{AES-GCM-256}\left(\text{Key}, \text{IV}_{96}, \text{BiometricStyleVector} \parallel \text{GlyphCache}\right)$$
+  100% of style extraction, trajectory calculation, and vector deposition executes strictly inside client browser memory and is persisted locally within `IndexedDB` (`dhse-vault`). Zero unencrypted biometric data ever touches network transit.
+
+### 3. Personal Quirks Engine & Evaluator Provenance Verification
+- **Motor Habit Idiosyncrasies**: Forensic document examiners (FDE) identify authentic authorship through microscopic personal habits rather than standardized letterforms. DiffusionPen introduces individual motor habit modeling:
+  - *European STEM Crossed '7' & 'Z'*: Injects middle horizontal crossbars ($x_{\text{cross}}, y_{\text{cross}}$) at $0.52 \cdot h$.
+  - *Elevated & Looped 't'-Bars*: Modulates crossbar elevation ratio ($0.65 \le y_t / h \le 0.88$) and terminal loop hooks.
+  - *Stochastic 'i'-Dotting Gestures*: Injects writer-specific dot shapes (open circular loops, diagonal dynamic slashes, filled ink pools) with Gaussian spatial offsets $\mathcal{N}(\mu, \sigma^2)$.
+  - *Authentic Scratch-Out Typo Corrections*: Replaces strikethrough text with organic double-loop scribble scratch-outs, mimicking natural human cognitive editing.
+  - *Personal Wet-Ink Signature Seal*: Embeds a fluid multi-loop signature flourish with cryptographic timestamp and SHA-256 verification hash.
+- **Evaluator Audit Mode ("Highlight Peculiars")**: To solve institutional skepticism in universities and research institutions, instructors and department heads can toggle **"Highlight Peculiars"**, which overlays dashed neon inspection halos and provenance tags over every quirk instance. Evaluators can confirm at a glance that the document was synthesized from the student's authentic motor profile.
+
+### 4. KaTeX MathML AST Decomposition for LaTeX Mathematics
+- **The Generative Math Failure**: Pure diffusion image-to-image models hallucinate mathematical notation—breaking fraction bars, confusing subscripts with standard glyphs, and distorting Greek symbols.
+- **AST Structural Mapping**: DiffusionPen walks the KaTeX MathML Abstract Syntax Tree (AST), decomposing mathematical equations into structural nodes:
+  $$\text{AST} \longrightarrow \left\{\text{Radicals } \sqrt{\cdot}, \text{ Fractions } \frac{a}{b}, \text{ Integrals } \int, \text{ Greek Symbols } \alpha, \beta, \gamma, \text{ Super/Subscripts}\right\}$$
+  Each mathematical node is mapped to organic continuous Bézier spline paths with strict bounding-box alignment along the equation baseline, preserving absolute mathematical correctness while rendering with natural pen imperfections.
+
+### 5. Dual-Domain Anti-Forgery Steganographic Watermarking
+- **Threat Model Mitigation**: Protects against unauthorized document forgery and deep neural network signature impersonation (e.g., TS-GATR attacks) through imperceptible dual-domain steganography:
+  - *Spatial Domain*: Micro-kerning inter-glyph spacing adjustments ($\Delta x_i \in [\pm 0.2, \pm 0.4]\text{ px}$) encoding bits via parity modulation.
+  - *Frequency Domain*: 2D Discrete Wavelet Transform (Haar DWT) embeds signed metadata into high-frequency wavelet subbands ($HH_1$):
+    $$\text{Payload} = \text{HMAC-SHA256}\left(\text{DocSerial} \parallel \text{UserHash} \parallel \text{Timestamp} \parallel \text{Nonce}\right)$$
+  - *Forensic Resilience*: The watermark survives print-and-scan operations (600 DPI physical digitizations) while remaining undetectable to human readers.
+
+### 6. Three.js 3D Binding Warp Mesh & Photometric Realism
+- **3D Environmental Geometry**: Rather than rendering on flat, synthetic 2D planes, DiffusionPen binds the handwritten document to a high-density 3D vertex displacement mesh:
+  $$z(x, y) = -0.04 \cdot (x + 0.5)^2 + 0.008 \cdot \sin(2.5 \cdot y)$$
+  This analytic deformation accurately replicates the physical gutter curvature of opened hardcover spiral notebooks and bound journals.
+- **Photometric Illumination**: Integrates Lambertian desk lamp point sources, dynamic shadow gradients, coffee ring stain textures, graphite smudge maps, and smartphone camera sensor noise shaders to achieve physical photorealism.
 
 ---
 
@@ -389,30 +443,79 @@ Every single chapter of the 83-page DHSE Master Architecture blueprint is implem
 
 ---
 
-## 🖋️ Studio Features & Peculiar Hallmarks
+## 🖥️ Visual Studio Walkthrough & Usability Guide
 
-### 1. Multi-Format Ingestion with Live Page 1 Preview
-- **Supported Formats**: Ingest `.pdf`, `.docx`, `.txt`, and `.md` files directly in the browser via drag & drop.
-- **Zero-Network Ingestion**: Text extraction is handled exclusively on the client device through `pdfjs-dist` and `mammoth.js`.
-- **Instant Page 1 Sample**: The studio immediately renders the first page in the active handwriting style, allowing instant visual feedback on font scale, line spacing, and slant adjustments before generating the full document.
+The DiffusionPen Studio interface is engineered for frictionless calibration, zero-leakage document ingestion, and forensic evaluator verification. Below is an exhaustive walkthrough of each core interface subsystem:
 
-### 2. Personal Quirks & Evaluator Verification ("Highlight Peculiars")
-Human handwriting is defined by subtle habits developed over decades of motor muscle memory. DiffusionPen allows users to configure and inject authentic personal motor habits:
-- **European Crossed '7' and 'Z'**: Adds distinctive middle horizontal strokes characteristic of STEM and European writers.
-- **High & Looped 't'-Bars**: Renders elevated, sweeping, or looped crossbars across all 't' characters.
-- **Custom 'i'-Dot Gestures**: Replaces standard round dots with open circle loops, rapid diagonal ticks, or deliberate ink pools.
-- **Authentic Typo Scratch-Outs**: Replaces strikethrough markup (`~~word~~`) with realistic double-loop scribble scratch-outs.
-- **Wet-Ink Signature Seal Block**: Appends a personalized cursive signature flourish with date stamp and verification hash.
-- **Evaluator Audit Mode**: Toggling **"Highlight Peculiars"** in the UI renders subtle dashed verification rings and trait badges around these quirks, enabling department heads, evaluators, and academic reviewers to confirm the authentic physical motor signature of the author.
+---
 
-### 3. Stationery Templates & Multi-Page PDF Exporter
-- **Stationery Paper Templates**:
-  - `College Ruled Notebook`: Authentic light blue horizontal rules with pink vertical margin line.
-  - `Engineering Grid Paper`: Subtle Cartesian millimeter coordinate grid.
-  - `Legal Pad`: Classic Canary yellow background with 34pt legal rules and dual margin bars.
-  - `Dotted Bullet Journal`: Precise 5mm isometric dotted matrix.
-  - `Blank Fine Parchment`: Clean organic parchment texture for unruled writing.
-- **High-DPI Multi-Page PDF Export**: Compiles paginated, vector-smooth handwritten pages using `jsPDF` with automatic page-break calculations, margin padding, and embedded steganographic verification watermarks.
+### 1. Unified Synthesis Workspace & Parameter Rail
+<div align="center">
+  <img src="./docs/assets/01-main-studio-workspace.png" alt="DiffusionPen Main Studio Workspace" width="900" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.4);" />
+  <p><em>Figure 1: Full Studio Workspace featuring structured Markdown/LaTeX editor (left), real-time biomechanical canvas (center), and dynamic parameter rail (right).</em></p>
+</div>
+
+#### Usability Engineering & Workflow:
+- **Dual-Pane Interaction**:
+  - **Left Source Editor**: Real-time structured text input supporting standard Markdown headings, LaTeX mathematics (`$\int_0^\infty ...$`), syntax-highlighted code blocks (` ```python ... ``` `), and Rough.js flowchart DSLs (`[Start] -> <Decision> -> (End)`).
+  - **Center Viewport (Biomechanical Canvas)**: Renders vector strokes in real-time at 60 FPS using HTML5 2D Canvas and SVG path compositing. Features interactive zoom presets (**75%**, **100%**, **125%**) and pagination controls (**< Page 1 of N >**).
+- **Dynamic Parameter Rail (Right Sidebar)**:
+  - **Font Scale (12pt – 48pt)**: Dynamically adjusts line height budgets and Schneider Bézier coordinate scaling.
+  - **Cursive Slant Angle (-25° to +25°)**: Controls forward or backward angular shearing matrix $\begin{bmatrix} 1 & \tan\theta \\ 0 & 1 \end{bmatrix}$.
+  - **Baseline Drift & Kerning Variance (0% – 30%)**: Modulates the amplitude of the compound harmonic sine wave and Box-Muller Gaussian kerning jitter.
+  - **Stationery Template Selector**: Instant 1-click switching across **Notebook**, **Engineering Grid**, **Legal Pad**, **Dotted Journal**, and **Blank Fine Parchment**.
+  - **Writing Instrument Physics**: Select between **Ballpoint Pen** (slight striations and skips), **Gel Pen** (smooth capillary ink bleed), **Fountain Pen** (flexible nib pressure variations), **Graphite Pencil** (subtle paper grain friction), and **Chisel Highlighter** (translucent fluorescent overlay).
+
+---
+
+### 2. Multi-Format Document Ingestion Engine (`.pdf`, `.docx`, `.txt`, `.md`)
+<div align="center">
+  <img src="./docs/assets/02-file-import-modal.png" alt="DiffusionPen File Import Modal" width="900" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.4);" />
+  <p><em>Figure 2: Multi-format file ingestion modal with drag-and-drop zone and instant Page 1 live write-up sample preview.</em></p>
+</div>
+
+#### Usability Engineering & Workflow:
+- **Drag-and-Drop Ingestion**:
+  - Drag and drop academic assignments, research drafts, or lecture notes directly onto the ingestion dropzone.
+  - Supported file formats: `.pdf` (via `pdfjs-dist`), `.docx` (via `mammoth.js`), `.txt`, and `.md`.
+- **Zero-Network Client Parsing**:
+  - PDF binary streams and Word DOCX XML packages are decompressed and parsed entirely within browser memory. No external server upload is ever initiated.
+- **Instant Live Page 1 Sample**:
+  - The moment a document is ingested, the system extracts the text and automatically generates an instant handwritten Page 1 sample in the viewport.
+  - Users can calibrate font scale, line spacing, and slant angles on this live sample before triggering a multi-page export.
+
+---
+
+### 3. Personal Quirks & Evaluator Verification ("Highlight Peculiars" Mode)
+<div align="center">
+  <img src="./docs/assets/03-personal-quirks-evaluator-highlight.png" alt="DiffusionPen Personal Quirks and Evaluator Audit Mode" width="900" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.4);" />
+  <p><em>Figure 3: Personal Quirks panel with 'Highlight Peculiars' audit mode active, overlaying dashed neon verification halos and motor trait badges.</em></p>
+</div>
+
+#### Usability Engineering & Workflow:
+- **Motor Trait Configuration**:
+  - Toggle and calibrate individual handwriting habits: European crossed '7' and 'Z', elevated 't'-bar crossbars, unconventional 'i'-dot gestures (open loop, diagonal slash), scratch-out typo corrections (`~~word~~`), and personal wet-ink signature seal blocks.
+- **Institutional Evaluator Audit Mode**:
+  - Click **"Highlight Peculiars for Review"** at any time.
+  - The canvas automatically highlights every injected motor habit with dashed verification halos and provenance badges (e.g., `Crossed-7`, `High-T`, `Typo-Correction`, `Signature-Flourish`).
+  - **Verification Utility**: Department heads, university professors, and evaluators can verify at a glance that the assignment contains the student's authentic neuromotor hallmarks, ruling out anonymous font generators while validating individual handwriting provenance.
+
+---
+
+### 4. Three.js 3D Environmental Realism & Photometric Studio
+<div align="center">
+  <img src="./docs/assets/04-3d-environmental-realism.png" alt="DiffusionPen 3D Environmental Realism Studio" width="900" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.4);" />
+  <p><em>Figure 4: WebGL Three.js 3D studio mode rendering non-linear spiral notebook binding warp curvature, desk lamp lighting, and organic stains.</em></p>
+</div>
+
+#### Usability Engineering & Workflow:
+- **1-Click 3D Mode Toggle**:
+  - Click the **"3D Mode"** button in the top navigation bar to project the 2D canvas into a fully interactive 3D WebGL viewport.
+- **Physical Notebook Gutter Curvature**:
+  - Employs analytic vertex displacement ($z = -0.04(x+0.5)^2 + 0.008\sin(2.5y)$) to simulate authentic notebook gutter dips and curved page lifts.
+- **Desk Lamp Photometry & Environmental Stains**:
+  - Warm desk lamp point lighting casts realistic specular reflections and shadow gradients across the paper fibers.
+  - Integrates authentic coffee cup ring stains, desk surface reflections, and camera film grain to pass automated document anti-spoofing filters.
 
 ---
 
