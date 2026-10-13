@@ -28,6 +28,9 @@ The DHSE platform is structured as an isolated five-layer client-heavy architect
 | **Ch. 6** | Kinematic Realism | `src/engine/PowerLawModulator.ts` | Two-Thirds Power Law ($\omega = K \kappa^{2/3}$), pressure modulation |
 | **Ch. 7** | Bézier Path Vectorization | `src/engine/BezierFitter.ts` | RDP simplification + Schneider least-squares cubic fitting |
 | **Ch. 8** | Interactive Calibration Sandbox | `src/sandbox/SandboxApp.tsx` | Real-time drawing canvas, parameter rail, live A/B preview |
+| **Ch. 8.1** | Multi-Format Document Importer | `src/importers/FileImporter.ts` | PDF (`pdfjs-dist`), Word DOCX (`mammoth`), TXT, Markdown parser with live Page 1 preview |
+| **Ch. 8.2** | Personal Quirks & Verification | `src/engine/PersonalQuirks.ts` | Crossed 7/Z, high T-bars, open/filled dots, scratch-out typo corrections, signature flourish, evaluator highlight tags |
+| **Ch. 8.3** | High-DPI Multi-Page PDF Exporter | `src/export/PdfExporter.ts` | Paginated PDF export (`jsPDF`) with authentic ruled paper templates & metadata |
 | **Ch. 9** | LaTeX Math Pipeline | `src/structured/LatexRenderer.ts` | KaTeX MathML AST walker, Greek symbol mapper, fallback registry |
 | **Ch. 10** | Code Block Handling | `src/structured/CodeBlockHandler.ts` | Language tokenizer, monospace organic jitter grid, syntax color mapping |
 | **Ch. 11** | Diagram Sketching | `src/structured/DiagramSketcher.ts` | Rough.js flowchart DSL parser (`[A] -> <B> -> (C)`), sketchy vectors |
@@ -44,12 +47,33 @@ The DHSE platform is structured as an isolated five-layer client-heavy architect
 | **Ch. 22** | Universal Plugin SDK | `src/plugins/DHSEPlugin.ts`, `VSCodePlugin.ts` | Universal plugin interfaces, VSCode companion extension implementation |
 | **Ch. 23** | Accessibility Deep-Dive | `src/a11y/AccessibilityEngine.ts` | Dysgraphia tremor stabilizer, 1.5s switch-control scanner, WCAG 2.2 AA audit pass |
 | **Ch. 24** | Monetization & Economics | `docs/MONETIZATION.md`, `src/types/pricing.ts` | Pricing tiers, unit economics (Pro LTV/CAC 11.7x), developer REST API |
-| **Ch. 25** | Testing & CI/CD Strategy | `tests/`, `package.json` | Vitest automated unit testing pyramid (14/14 tests passing) |
+| **Ch. 25** | Testing & CI/CD Strategy | `tests/`, `package.json` | Vitest automated unit testing pyramid (18/18 tests passing) |
 | **Ch. 26** | 18-Month Roadmap | `docs/ROADMAP.md` | Q1–Q6 quarterly milestone tracking |
 | **Ch. 27** | Top-15 Risk Register | `docs/RISKS.md` | Comprehensive security, technical, and regulatory risk mitigations |
 | **App. A** | Public APIs | `src/engine/DHSEEngine.ts`, `server/main.py` | Universal JavaScript SDK client & FastAPI REST API |
 | **App. B** | Storage Schemas | `src/types/vault.ts`, `server/schema.sql` | IndexedDB `dhse-vault` & Cloud Postgres database schemas |
 | **App. C** | Academic Bibliography | `docs/REFERENCES.md` | Full literature citations (Graves, CONSTANT, DiffusionPen, Lacquaniti, Viviani) |
+
+---
+
+## Key Studio Features
+
+### 1. Multi-Format Ingestion (PDF, Word DOCX, TXT, MD)
+- **Instant Live Page 1 Sample**: Ingest academic assignments, research drafts, or lecture notes and preview the handwritten transformation instantly.
+- **Client-Side Text Extraction**: Uses `pdfjs-dist` and `mammoth` entirely within the browser with zero external server upload.
+
+### 2. Personal Quirks & Evaluator Verification ("Highlight Peculiars")
+- **Authentic Motor Hallmarks**:
+  - European crossed '7' and crossed 'Z'
+  - High and looped 't'-bar crossbars
+  - Unconventional 'i'-dot gestures (open circle, filled dot, diagonal slash)
+  - Realistic scratch-out typo corrections (`~~word~~`) and wavy underlines
+  - Personalized wet-ink signature flourish seal block
+- **Evaluator Audit Mode**: Toggling **"Highlight Peculiars"** renders dashed annotation halos and provenance badges, allowing department heads and evaluators to quickly verify that the submission exhibits the student's unique physical motor traits.
+
+### 3. Multi-Page Authentic Handwritten PDF Export
+- Generates high-DPI vector-fidelity PDFs with paginated layout matching standard notebook, grid, legal, dotted, or blank stationery.
+- Includes embedded cryptographic verification watermarks for provenance tracking.
 
 ---
 
