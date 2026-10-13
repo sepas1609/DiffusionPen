@@ -1,5 +1,5 @@
 import React from 'react';
-import { RenderParams, InstrumentType } from '../../types/engine';
+import { RenderParams, InstrumentType, PaperTemplateType } from '../../types/engine';
 
 interface ParameterRailProps {
   params: RenderParams;
@@ -26,10 +26,85 @@ export const ParameterRail: React.FC<ParameterRailProps> = ({ params, onChange, 
         </button>
       </div>
 
+      {/* Typography & Font Sizing */}
+      <div className="rail-section">
+        <span className="rail-title">Typography & Geometry</span>
+
+        {/* Font Size Scale */}
+        <div className="slider-group">
+          <div className="slider-header">
+            <label htmlFor="param-fontsize">Handwriting Size</label>
+            <span className="slider-value">{(params.fontSizeScale ?? 1.0).toFixed(2)}x</span>
+          </div>
+          <input
+            id="param-fontsize"
+            type="range"
+            min={0.75}
+            max={1.5}
+            step={0.05}
+            value={params.fontSizeScale ?? 1.0}
+            onChange={(e) => update('fontSizeScale', parseFloat(e.target.value))}
+          />
+        </div>
+
+        {/* Slant Angle */}
+        <div className="slider-group">
+          <div className="slider-header">
+            <label htmlFor="param-slant">Cursive Slant Angle</label>
+            <span className="slider-value">{(params.slantAngle ?? 4.0).toFixed(1)}°</span>
+          </div>
+          <input
+            id="param-slant"
+            type="range"
+            min={-12.0}
+            max={22.0}
+            step={1.0}
+            value={params.slantAngle ?? 4.0}
+            onChange={(e) => update('slantAngle', parseFloat(e.target.value))}
+          />
+        </div>
+
+        {/* Word Spacing */}
+        <div className="slider-group">
+          <div className="slider-header">
+            <label htmlFor="param-wordspacing">Word Spacing Multiplier</label>
+            <span className="slider-value">{(params.wordSpacingScale ?? 1.0).toFixed(2)}x</span>
+          </div>
+          <input
+            id="param-wordspacing"
+            type="range"
+            min={0.75}
+            max={1.6}
+            step={0.05}
+            value={params.wordSpacingScale ?? 1.0}
+            onChange={(e) => update('wordSpacingScale', parseFloat(e.target.value))}
+          />
+        </div>
+
+        {/* Letter Spacing */}
+        <div className="slider-group">
+          <div className="slider-header">
+            <label htmlFor="param-letterspacing">Letter Spacing (Kerning)</label>
+            <span className="slider-value">{(params.letterSpacingScale ?? 1.0).toFixed(2)}x</span>
+          </div>
+          <input
+            id="param-letterspacing"
+            type="range"
+            min={0.8}
+            max={1.4}
+            step={0.05}
+            value={params.letterSpacingScale ?? 1.0}
+            onChange={(e) => update('letterSpacingScale', parseFloat(e.target.value))}
+          />
+        </div>
+      </div>
+
+      <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)' }} />
+
       {/* Variance Band (Chapter 5.3) */}
       <div className="slider-group">
         <div className="slider-header">
-          <label htmlFor="param-variance">Variance Band</label>
+          <label htmlFor="param-variance">Variance Band (Authenticity)</label>
           <span className="slider-value">{params.variancePct.toFixed(1)}%</span>
         </div>
         <input
@@ -40,12 +115,9 @@ export const ParameterRail: React.FC<ParameterRailProps> = ({ params, onChange, 
           step={0.1}
           value={params.variancePct}
           onChange={(e) => update('variancePct', parseFloat(e.target.value))}
-          aria-valuemin={5.0}
-          aria-valuemax={15.0}
-          aria-valuenow={params.variancePct}
         />
         <span style={{ fontSize: '10.5px', color: '#64748b' }}>
-          Optimal authentic band: 5–15% (internal study n=240)
+          Turing authentic band: 5–15% (default 9%)
         </span>
       </div>
 
@@ -63,23 +135,6 @@ export const ParameterRail: React.FC<ParameterRailProps> = ({ params, onChange, 
           step={0.1}
           value={params.baselineAmp}
           onChange={(e) => update('baselineAmp', parseFloat(e.target.value))}
-        />
-      </div>
-
-      {/* Kerning Sigma (Chapter 5.2) */}
-      <div className="slider-group">
-        <div className="slider-header">
-          <label htmlFor="param-kerning">Gaussian Kerning σ</label>
-          <span className="slider-value">{params.kerningSigma.toFixed(2)} px</span>
-        </div>
-        <input
-          id="param-kerning"
-          type="range"
-          min={0.2}
-          max={2.0}
-          step={0.05}
-          value={params.kerningSigma}
-          onChange={(e) => update('kerningSigma', parseFloat(e.target.value))}
         />
       </div>
 
@@ -102,6 +157,24 @@ export const ParameterRail: React.FC<ParameterRailProps> = ({ params, onChange, 
 
       <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)' }} />
 
+      {/* Paper Template Selector */}
+      <div className="rail-section">
+        <span className="rail-title">Paper Canvas Template</span>
+        <select
+          id="param-papertemplate"
+          className="form-select"
+          value={params.paperTemplate}
+          onChange={(e) => update('paperTemplate', e.target.value as PaperTemplateType)}
+          aria-label="Select paper canvas template"
+        >
+          <option value="notebook">Ruled Notebook (Single Line + Margin)</option>
+          <option value="grid">Engineering Quad (5mm Grid Paper)</option>
+          <option value="legal">Yellow Legal Pad (Double Margin)</option>
+          <option value="dotted">Dotted Journal (Bullet Planner)</option>
+          <option value="blank">Smooth Parchment (Blank Sheet)</option>
+        </select>
+      </div>
+
       {/* Instrument Physics Model (Chapter 14) */}
       <div className="rail-section">
         <span className="rail-title">Instrument Physics</span>
@@ -115,7 +188,7 @@ export const ParameterRail: React.FC<ParameterRailProps> = ({ params, onChange, 
           <option value="ballpoint">Ballpoint Pen (Micro-skips & striations)</option>
           <option value="gel">Gel Pen (Uniform ink & bleed halo)</option>
           <option value="fountain">Fountain Pen (Nib-flex & capillary pooling)</option>
-          <option value="pencil">Graphite Pencil (Grain noise & pressure)</option>
+          <option value="pencil">Graphite Pencil (Grain noise & shading)</option>
           <option value="marker">Chisel Highlighter (Translucent blend)</option>
         </select>
       </div>
@@ -148,43 +221,16 @@ export const ParameterRail: React.FC<ParameterRailProps> = ({ params, onChange, 
             checked={params.fatigueEnabled}
             onChange={(e) => update('fatigueEnabled', e.target.checked)}
           />
-          Enable Muscular Fatigue Decay
+          Muscular Fatigue Decay Over Length
         </label>
       </div>
 
       <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)' }} />
 
-      {/* Paper & Ink Styling */}
+      {/* Ink & Paper Stock Color Pickers */}
       <div className="rail-section">
-        <span className="rail-title">Paper & Ink Environment</span>
-        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', cursor: 'pointer' }}>
-          <input
-            type="checkbox"
-            checked={params.ruledLines}
-            onChange={(e) => update('ruledLines', e.target.checked)}
-          />
-          Notebook Ruled Lines & Margin
-        </label>
-
-        {params.ruledLines && (
-          <div className="slider-group" style={{ marginTop: '4px' }}>
-            <div className="slider-header">
-              <label htmlFor="param-spacing">Line Spacing</label>
-              <span className="slider-value">{params.ruledSpacing} px</span>
-            </div>
-            <input
-              id="param-spacing"
-              type="range"
-              min={22}
-              max={38}
-              step={1}
-              value={params.ruledSpacing}
-              onChange={(e) => update('ruledSpacing', parseInt(e.target.value))}
-            />
-          </div>
-        )}
-
-        <div style={{ display: 'flex', gap: '12px', marginTop: '6px' }}>
+        <span className="rail-title">Ink Shade & Stock</span>
+        <div style={{ display: 'flex', gap: '12px' }}>
           <div style={{ flex: 1 }}>
             <span style={{ fontSize: '11px', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>Ink Shade</span>
             <input
