@@ -94,7 +94,7 @@ Navigate to `http://localhost:5173` to explore the live interactive studio.
 ```bash
 npm test
 ```
-Executes all 14 unit tests across the biomechanical motor simulation, encrypted vault, structured content pipelines, and steganographic watermarking.
+Executes all 18 unit tests across the biomechanical motor simulation, encrypted vault, structured content pipelines, personal quirks, and steganographic watermarking.
 
 ### 4. Build Production Bundle
 ```bash
